@@ -1,0 +1,45 @@
+package week02;
+
+public class Coins {
+
+    public static final boolean HEADS = true;
+    public static final boolean TAILS = false;
+	
+    private boolean[] coins;
+	
+    public Coins(boolean[] coins) {
+        this.coins = coins;
+    }
+    /*
+    public static void main(String[] args) {
+        boolean[] b = {HEADS, TAILS, HEADS, HEADS, TAILS};
+        Coins c = new Coins(b);
+        System.out.println(c.countHeads());
+    }
+    */
+    public int countHeads() {
+        int headCount = 0;
+        for (boolean f: coins) {
+            if (f == HEADS) {
+                headCount++;
+            }
+        }
+        return headCount;
+    }
+
+    public int countTails() {
+        int tailsCount = 0;
+        for (boolean f: coins) {
+            if (f == TAILS) {
+                tailsCount++;
+            }
+        }
+        return tailsCount;
+    }
+
+    public String toString() {
+        return "H: " + countHeads() + "\nT: " + countTails() + "\n";
+    }
+
+   
+}

@@ -1,0 +1,72 @@
+package week08;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
+
+/**
+ *  Another random word generator.
+ *
+ * @author Yohan de Rose
+ */
+public class FrequencyGenerator implements WordGenerator {
+
+    /**Creates random df from constructor.*/
+    private Random random;
+
+    /**
+     *  Constructs a basic random word generator which uses the given
+     *  random object.
+     *
+     * @param r a source of randomness used when generating words.
+     */
+    public FrequencyGenerator(Random r) {
+
+        random = r;
+    }
+
+    /**
+     *  Constructs a basic random word word of length n.
+     *
+     * @param n a source of randomness used when generating words.
+     * @return returns a random word of length n
+     */
+    public String nextWord(int n) {
+
+        final int alphlen = 26;
+        StringBuilder result = new StringBuilder();
+        double[] weights = new double[alphlen];
+        char[] letters = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+
+        try {
+            String x = "/home/cshome/a/aderose/COMP160/Randomness";
+            String y = "/src/letter-frequencies.txt";
+            Scanner file = new Scanner(new File(x + y));
+
+            int i = 0;
+            while (file.hasNextLine()) {
+                weights[i] = Double.parseDouble(file.nextLine());
+                i++;
+            }
+
+
+        } catch (FileNotFoundException e) {
+            System.exit(-1);
+        }
+
+
+        for (int j = 0; j < n; j++) {
+            double r = random.nextDouble();
+            int i = 0;
+            while (r > weights[i]) {
+                r -= weights[i];
+                i++;
+            }
+            result.append(letters[i]);
+        }
+
+
+        return result.toString();
+    }
+
+}
